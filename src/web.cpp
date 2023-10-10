@@ -154,19 +154,27 @@ void getZbVer(){
     const byte zero = 0x00;
     const byte cmd1 = 0x21;
     const byte cmd2 = 0x02;
-    const byte cmdSysVersion[] = {cmdFrameStart, zero, cmd1, cmd2, 0x23};
+    //const byte cmdSysVersion[] = {cmdFrameStart, zero, cmd1, cmd2, 0x23};
+    const byte cmdSysAisVersion[] = {0x00, 0x42, 0x21, 0xa8, 0x50, 0xed, 0x2c, 0x7e};
+    //
+    clearS2Buffer();//skip
+    Serial2.write(cmdSysAisVersion, sizeof(cmdSysAisVersion));
+    Serial2.flush();
+    delay(1000);
     for (uint8_t i = 0; i < 6; i++){
-      if (Serial2.read() != cmdFrameStart || Serial2.read() != 0x0a || Serial2.read() != 0x61 || Serial2.read() != cmd2){//check for packet start
+       byte sr = Serial2.read();
+      if (sr != 0x1a){//check for packet start
         clearS2Buffer();//skip
-        Serial2.write(cmdSysVersion, sizeof(cmdSysVersion));
+        Serial2.write(cmdSysAisVersion, sizeof(cmdSysAisVersion));
         Serial2.flush();
-        delay(100);
+        delay(1000);
       }else{
         const uint8_t zbVerLen = 11;
         byte zbVerBuf[zbVerLen];
         for (uint8_t i = 0; i < zbVerLen; i++){
           zbVerBuf[i] = Serial2.read();
         }
+        
         zbVer.zbRev =  zbVerBuf[5] | (zbVerBuf[6] << 8) | (zbVerBuf[7] << 16) | (zbVerBuf[8] << 24);
         zbVer.maintrel = zbVerBuf[4];
         zbVer.minorrel = zbVerBuf[3];

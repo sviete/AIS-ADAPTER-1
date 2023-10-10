@@ -152,15 +152,10 @@ function generateConfig(params) {
 		case "z2m":
 			result = `# Serial settings
 serial:
-  # Location of SLZB-06
+  # Location of AIS-ADAPTER-1
   port: tcp://${ip}:${port}
   baudrate: ${$("#baud").val()}
-  adapter: zstack
-  # Disable green led?
-  disable_led: false
-# Set output power to max 20
-advanced:
-  transmit_power: 20`;
+  adapter: ezsp`;
 		break;
 		case "usb":
 			result = `# For homeassistant: Go to "Settings"→"System"→"Hardware"→Select the 3 dot menu in the upper right corner→"All Hardware"→Scroll to ttyUSB and find your adapter→Copy Device path like "/dev/ttyUSB0"

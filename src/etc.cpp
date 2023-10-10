@@ -96,7 +96,7 @@ void zigbeeEnableBSL()
   //printLogMsg("Zigbee BSL pin OFF");
   DEBUG_PRINTLN(F("Zigbee BSL pin OFF"));
   digitalWrite(CC2652P_FLSH, 1);
-  printLogMsg("Now you can flash CC2652!");
+  printLogMsg("Now you can flash Zigbee!");
 }
 
 void zigbeeRestart()
