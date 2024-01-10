@@ -1,5 +1,18 @@
 nav h2, #pagenamePC{
-  color: lightcoral;
+  color: #ffffff;
+}
+
+input.swFx{
+  border: 1px solid rgba(0,0,0,.25) !important;
+}
+
+input.swFx:checked {
+  background-color: #FF9800 !important;
+  border-color: #FF9800 !important;
+}
+
+label.swFx{
+  color: white !important;
 }
 
 #smPreloader{
@@ -153,18 +166,18 @@ nav h2, #pagenamePC{
 
 #bar,
 #prgbar {
-  background-color: #f1f1f1;
+  background-color: #212529;
   border-radius: 10px
 }
 
 #bar {
-  background-color: #17a2b8;
+  background-color: #ffc107;
   width: 0%;
   height: 10px
 }
 
 form#upload_form {
-  background: #fff;
+  background: #21252900;
   max-width: 408px;
   border-radius: 5px;
   text-align: center
@@ -183,4 +196,67 @@ div#update_info {
 div#main {
   margin-left: auto;
   margin-right: auto;
+}
+
+table.table > tr {
+  line-height: 2em;
+}
+
+a.nav-link {
+  color: white !important;
+}
+
+button.btn {
+  --bs-btn-color: #9E9E9E;
+  --bs-btn-border-color: #FF9800;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #FF9800;
+  --bs-btn-hover-border-color: #FF9800;
+  --bs-btn-focus-shadow-rgb: 13,110,253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #FF9800;
+  --bs-btn-active-border-color: #FF9800;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #FF9800;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #FF9800;
+  --bs-gradient: none;
+}
+
+button.btn-warning {
+  --bs-btn-color: #9E9E9E;
+  --bs-btn-bg: #9e9e9e00;
+}
+
+button.nav-link {
+  color: #FF9800;
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: #FFC107;
+}
+
+li.nav-active {
+  background-color: #d98200;
+}
+
+.form-check-input:checked {
+  background-color: #FF9800 !important;
+  border-color: #FF9800 !important;
+}
+
+.nav-link:focus, .nav-link:hover {
+  color: #FFC107 !important;
+}
+
+.table {
+  --bs-table-color: #cecbcb !important;
+}
+
+nav.bg-light {
+ background-color: #d98200 !important;
+}
+
+div.spinner-border {
+  color:  #d98200 !important;
 }

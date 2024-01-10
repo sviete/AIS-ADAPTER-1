@@ -1,0 +1,12 @@
+{
+    "name": "SLZB-06 development build",
+    "builds": [
+      {
+        "chipFamily": "ESP32",
+        "improv": false,
+        "parts": [
+          { "path": "https://raw.githubusercontent.com/smlight-dev/slzb-06-firmware/dev/webFlasher/dev.bin", "offset": 0 }
+        ]
+      }
+    ]
+  }

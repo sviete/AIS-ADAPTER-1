@@ -7,19 +7,20 @@
 
 #define DEBUG
 //ESP32 PINS TO CONTROL LAN8720
-#define ETH_CLK_MODE_1 ETH_CLOCK_GPIO0_IN
+#define ETH_CLK_MODE_1 ETH_CLOCK_GPIO17_OUT
 #define ETH_POWER_PIN_1 16
 #define ETH_TYPE_1 ETH_PHY_LAN8720
 #define ETH_ADDR_1 1
 #define ETH_MDC_PIN_1 23
 #define ETH_MDIO_PIN_1 18
 //ESP32 PINS TO CONTROL CC2652P
-#define CC2652P_RST 33
-#define CC2652P_FLSH 32
-#define CC2652P_RXD 5
-#define CC2652P_TXD 17
-#define BTN 35
-#define MODE_SWITCH 4
+#define CC2652P_RST 13
+#define CC2652P_FLSH 12
+#define CC2652P_RXD 4
+#define CC2652P_TXD 2
+//
+#define BTN 34
+#define MODE_SWITCH 33
 #define DEBOUNCE_TIME 70
 #define PRODUCTION 1
 #define TCP_LISTEN_PORT 9999
@@ -27,18 +28,20 @@
 
 const int16_t overseerInterval = 5 * 1000; //check lan or wifi connection every 5sec
 const uint8_t overseerMaxRetry = 12; //5x12 = 60sec delay for AP start
-const uint8_t LED_BLUE = 12;
+const uint8_t LED_BLUE = 15;
 const uint8_t LED_YELLOW = 14;
 const uint8_t MAX_SOCKET_CLIENTS = 5;
 
 enum COORDINATOR_MODE_t : uint8_t {COORDINATOR_MODE_LAN, COORDINATOR_MODE_WIFI, COORDINATOR_MODE_USB};
 
-// struct JsonConsts_t{
-//   char* str;
-// };
-// JsonConsts_t JsonConsts {
-//   "sadasd"
-// };
+struct zbVerStruct{
+  uint32_t zbRev;
+  uint8_t maintrel;
+  uint8_t minorrel;
+  uint8_t majorrel;
+  uint8_t product;
+  uint8_t transportrev;
+};
 
 struct ConfigSettingsStruct{
   char ssid[50];
@@ -58,7 +61,7 @@ struct ConfigSettingsStruct{
   int refreshLogs;
   char hostname[50];
   bool connectedSocket[10];
-  int connectedClients;
+  uint8_t connectedClients;
   unsigned long socketTime;
   int tempOffset;
   bool webAuth;
@@ -75,14 +78,15 @@ struct ConfigSettingsStruct{
   bool wifiWebSetupInProgress;
   bool fwEnabled;
   IPAddress fwIp;
+  bool zbFlashing;
 };
 
-struct InfosStruct
-{
-  char device[8];
-  char mac[8];
-  char flash[8];
-};
+// struct InfosStruct
+// {
+//   char device[8];
+//   char mac[8];
+//   char flash[8];
+// };
 
 typedef CircularBuffer<char, 8024> LogConsoleType;
 

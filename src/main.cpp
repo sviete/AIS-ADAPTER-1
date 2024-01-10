@@ -23,7 +23,8 @@
 #define BUFFER_SIZE 256
 
 ConfigSettingsStruct ConfigSettings;
-InfosStruct Infos;
+zbVerStruct zbVer;
+//InfosStruct Infos;
 
 volatile bool btnFlag = false;
 bool updWeb = false;
@@ -36,7 +37,7 @@ const char* configFileEther = "/config/configEther.json";
 const char* configFileGeneral = "/config/configGeneral.json";
 const char* configFileSecurity = "/config/configSecurity.json";
 const char* configFileSerial = "/config/configSerial.json";
-const char* deviceModel = "SLZB-06";
+const char* deviceModel = "AIS-ADAPTER-1";
 
 void mDNS_start();
 void connectWifi();
@@ -44,6 +45,8 @@ void handlelongBtn();
 void handletmrNetworkOverseer();
 void setupCoordinatorMode();
 void startAP(const bool start);
+void printRecvSocket(size_t bytes_read, uint8_t net_buf[BUFFER_SIZE]);
+
 IPAddress parse_ip_address(const char *str);
 
 Ticker tmrBtnLongPress(handlelongBtn, 1000, 0, MILLIS);
@@ -613,7 +616,7 @@ void mDNS_start()
     //--zeroconf zha--
     MDNS.addService(host, tcp, ConfigSettings.socketPort);
     MDNS.addServiceTxt(host, tcp, "version", "1.0");
-    MDNS.addServiceTxt(host, tcp, "radio_type", "znp");
+    MDNS.addServiceTxt(host, tcp, "radio_type", "ezsp");
     MDNS.addServiceTxt(host, tcp, "baud_rate", String(ConfigSettings.serialSpeed));
     MDNS.addServiceTxt(host, tcp, "data_flow_control", "software");
   }
@@ -717,6 +720,11 @@ void setupCoordinatorMode(){
   DEBUG_PRINTLN(F("setupCoordinatorMode"));
   DEBUG_PRINTLN(F("Mode is:"));
   DEBUG_PRINTLN(ConfigSettings.coordinator_mode);
+  // AIS START
+  if (ConfigSettings.coordinator_mode == COORDINATOR_MODE_USB) {
+    DEBUG_PRINTLN(F("WRONG MODE DETECTED, set to LAN"));
+    ConfigSettings.coordinator_mode = COORDINATOR_MODE_LAN;
+  } // AIS END
   DEBUG_PRINTLN(F("--------------"));
   if(ConfigSettings.coordinator_mode != COORDINATOR_MODE_USB || ConfigSettings.keepWeb){//start network overseer
     if(tmrNetworkOverseer.state() == STOPPED){
@@ -755,12 +763,6 @@ void setupCoordinatorMode(){
 //   cmd[size] = checksum;
 //   serial.write(cmd, size);
 // }
-
-void clearS2Buffer(){
-  while (Serial2.available()){//clear buffer
-    Serial2.read();
-  }
-}
 
 void setup(){
   Serial.begin(115200);//todo ifdef DEBUG
@@ -806,21 +808,26 @@ void setup(){
   const byte cmdLedLen = 0x02;
   const byte zigLed1Off[] = {cmdFrameStart, cmdLedLen, cmdLed0, cmdLed1, cmdLedIndex, cmdLedStateOff, 0x2E}; //resp FE 01 67 0A 00 6C
   const byte zigLed1On[] = {cmdFrameStart, cmdLedLen, cmdLed0, cmdLed1, cmdLedIndex, cmdLedStateOn, 0x2F};
-  const byte cmdLedResp[] = {0xFE, 0x01, 0x67, 0x0A, 0x00, 0x6C};
+  const byte cmdLedResp[] = {cmdFrameStart, cmdLedIndex, 0x67, cmdLed1, cmdLedStateOff, 0x6C};
   Serial2.begin(115200, SERIAL_8N1, CC2652P_RXD, CC2652P_TXD); //start zigbee serial
+
+  // AIS
+  const byte aisHello[] = {0x1a, 0xc0, 0x38, 0xbc, 0x7e};
+  const byte aisResp[] = {0x1a, 0xc1, 0x02, 0x0b};
   bool respOk = false;
   for (uint8_t i = 0; i < 12; i++){//wait for zigbee start
     if(respOk) break;
     clearS2Buffer();
-    Serial2.write(zigLed1On, sizeof(zigLed1On));
+    Serial2.write(aisHello, sizeof(aisHello));
     Serial2.flush();
     delay(400);
+
     for (uint8_t i = 0; i < 5; i++){
-      if (Serial2.read() != 0xFE){//check for packet start
-        Serial2.read();//skip
+      if (Serial2.read() != 0x1a){//check for packet start
+        Serial2.read(); //skip
       }else{
         for (uint8_t i = 1; i < 4; i++){
-          if(Serial2.read() != cmdLedResp[i]){//check if resp ok
+          if(Serial2.read() != aisResp[i]){//check if resp ok
             respOk = false;
             break;
           }else{
@@ -841,10 +848,14 @@ void setup(){
           delay(1000);
         }
     printLogMsg("[ZBCHK] Wrong answer");
+    printLogMsg("[ZBVER] Unknown");
+    zbVer.zbRev = 0;
   }else{
-    Serial2.write(zigLed1Off, sizeof(zigLed1Off));
+    Serial2.write(aisHello, sizeof(aisHello));
     Serial2.flush();
-    printLogMsg("[ZBCHK] connection established");
+    clearS2Buffer();
+    printLogMsg("[ZBCHK] Connection OK");
+    getZbVer();
   }
   digitalWrite(LED_YELLOW, 0);
   digitalWrite(LED_BLUE, 0);
@@ -908,8 +919,10 @@ void setup(){
   setLedsDisable(ConfigSettings.disableLeds, true);
   setupCoordinatorMode();
   ConfigSettings.connectedClients = 0;
+  ConfigSettings.zbFlashing = 0;
 
   Serial2.updateBaudRate(ConfigSettings.serialSpeed);//set actual speed
+
   printLogMsg("Setup done");
 }
 
@@ -1037,7 +1050,7 @@ void loop(void){
     }
   }
 
-  if (ConfigSettings.coordinator_mode != COORDINATOR_MODE_USB){
+  if (ConfigSettings.coordinator_mode != COORDINATOR_MODE_USB && ConfigSettings.zbFlashing != 1){//stop socket upd in usb mode or zb ota
     uint16_t net_bytes_read = 0;
     uint8_t net_buf[BUFFER_SIZE];
     uint16_t serial_bytes_read = 0;
