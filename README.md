@@ -12,7 +12,9 @@ This repository contains latest firmware for ESP32 peripheral module of [AIS-ADA
 - ESP32 (peripheral) OTA update, ESP32  and EFR32MG21 restart;
 - Switch EFR32MG21 (Zigbee) to flash mode;
 - Pairing mode for adapter in router mode;
-- Fully responsive web-interface based on the Bootstrap 5.2.
+- Fully responsive web-interface based on the Bootstrap
+
+![ais](https://github.com/sviete/AIS-ADAPTER-1/blob/main/img/ais.png)
 
 ## Installation and Configuration
 
