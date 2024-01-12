@@ -498,7 +498,7 @@ function startEvents() {
 		const data = e.data.replaceAll("`", "<br>");
 		if(data == "[start]") $("#zbFlshPrgs").removeClass("progress-bar-animated");
 		$("#zbFlshPgsTxt").html(data);
-		if(e.data.indexOf("Update done!") > 0){
+		if(data == "Update done!"){
 			$(".progress").addClass(classHide);
 			$(modalBody).css("color", "green");
 				setTimeout(()=>{

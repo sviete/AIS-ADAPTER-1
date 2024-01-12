@@ -325,7 +325,20 @@ void handleApi() {  // http://192.168.0.116/api?action=0&page=0
                             }
                         }
                         fwFile.close();
-                        //in development
+                        //flashing firmware
+                        sendEvent(tagZB_FW_progress, eventLen, String(0));
+                        sendEvent(tagZB_FW_info, eventLen, "Flashing firmware...");
+                        for (size_t i = 0; i < 11; i++)
+                        {
+                            // todo flash zigbee
+                            sleep(1);
+                            sendEvent(tagZB_FW_progress, eventLen, String(10 * i));
+                        }
+                        // restart to bootloader
+                        sendEvent(tagZB_FW_info, eventLen, "Update done!");
+                        
+                        
+                        
                         
                     }else{
                         serverWeb.send(HTTP_CODE_BAD_REQUEST, contTypeText, String(httpsCode));

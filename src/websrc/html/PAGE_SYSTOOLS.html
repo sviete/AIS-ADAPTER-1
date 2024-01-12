@@ -167,11 +167,13 @@
 
   <script src="/js/masonry.min.js"></script>
   <script>
-    $(".flsh_zb").click(function () {//http://192.168.0.105/api?action=10&fwurl=https://raw.githubusercontent.com/Tarik2142/devHost/main/coordinator_20220219.bin
-      alert("Feature under development");
-      //modalConstructor("flashZB");//
-      //apiLink + api.actions.API_FLASH_ZB + "&fwurl=" + "https://raw.githubusercontent.com/Tarik2142/devHost/main/" + this.id + ".bin"
+    $(".flsh_zb").click(function () {
+      //http://192.168.0.105/api?action=10&fwurl=https://raw.githubusercontent.com/Tarik2142/devHost/main/coordinator_20220219.bin
+      //alert("Feature under development");
+      modalConstructor("flashZB");
+      apiLink + api.actions.API_FLASH_ZB + "&fwurl=" + "https://raw.githubusercontent.com/Tarik2142/devHost/main/" + this.id + ".bin"
     });
+
     function sub(obj) {
       let fileName = obj.value.split('\\\\');
       if (fileName != "") {
@@ -183,6 +185,7 @@
       }
       document.getElementById('file-input').innerHTML = '   ' + fileName[fileName.length - 1];
     };
+    
     $('form#upload_form').submit(function (e) {
       e.preventDefault();
       var form = $('#upload_form')[0];

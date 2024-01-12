@@ -3,40 +3,51 @@
 All notable changes to this project will be documented in this file.
 
 ## [1.0.0] 20230409 dev
+
 ### Added
+
 - Zigbee OTA updates
 - Zigbee firmare version on Status page
 - Added a link to the manual on About page
 - Prometheus / OpenMetrics metrics endpoint test. Endpoint: /metrics
 
 ### Changed
+
 - Minor code improvements and optimizations
 - Changed the order of links on the About page
 
 ### Fixed
+
 - Fixed fields validation on Ethernet page
 
 ### Removed
 
 ## [0.9.9] 20230303
+
 ### Added
+
 - Added whitelist for socket IP in "Security". You can choose the IP address that will have access to the TCP socket;
 - Added USB mode option for Config generator;
 - (c) sign
 
 ### Changed
+
 - Minor code improvements and optimizations;
 
 ### Fixed
+
 - WiFi mode toast visibility fix; 
 
 ### Removed
+
 - Removed gateway ping check;
 
 ------------
 
 ## [0.9.8] 20221226
+
 ### Added
+
 - NEW WIFI COORDINATOR MODE ARRIVED!;
 - ZHA zeroconf discovery [PR 84111](https://github.com/home-assistant/core/pull/84111)
 - Added visual confirmation of command execution success for all buttons in the interface;
@@ -53,6 +64,7 @@ All notable changes to this project will be documented in this file.
 - Card grid now have responsible height.
 
 ### Changed
+
 - Now all buttons work through a single API;
 - Zigbee socket is now available in access point mode. This means that you can now flash the Zigbee module in access point mode;
 - All svg icons combined into one;
@@ -73,29 +85,24 @@ All notable changes to this project will be documented in this file.
 - Merge "sys-tools" & "logs-browser" pages;
 
 ### Fixed
+
 - Wi-Fi access point is no longer disabled during network scanning; 
 - Toast position fix;
 - Link to the site has been corrected on "About" page;
 
 
 ### Removed
+
 - Removed unnecessary server endpoints;
 - Some of the parameters that are no longer used have been removed from the config;
 - Removed all code from html.h;
 - Cleaning unused files;
 
-
 ------------
 
 ## [0.9.1] 20221025
+
 ### Added
+
 - Initial release
-
-### Changed
-
-### Fixed
-
-### Removed
-
-
-
+S
