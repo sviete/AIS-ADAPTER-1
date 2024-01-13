@@ -9,7 +9,8 @@ const spiner2 = $("<span>", {
 	"class": classHide
 });
 
-const zbFwInfoUrl = "https://raw.githubusercontent.com/smlight-dev/slzb-06-firmware/dev/ota/fw.json";
+// 
+const zbFwInfoUrl = "https://raw.githubusercontent.com/sviete/AIS-ADAPTER-1/main/ota/fw.json";
 
 const headerText = ".modal-title";
 const headerBtnClose = ".modal-btn-close";

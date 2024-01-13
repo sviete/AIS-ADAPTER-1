@@ -328,13 +328,18 @@ void handleApi() {  // http://192.168.0.116/api?action=0&page=0
                         //flashing firmware
                         sendEvent(tagZB_FW_progress, eventLen, String(0));
                         sendEvent(tagZB_FW_info, eventLen, "Flashing firmware...");
+
                         for (size_t i = 0; i < 11; i++)
                         {
                             // todo flash zigbee
                             sleep(1);
                             sendEvent(tagZB_FW_progress, eventLen, String(10 * i));
                         }
-                        // restart to bootloader
+
+                        // restart zigbee to bootloader
+                        // todo
+                        // write file to zigbee
+                        // 
                         sendEvent(tagZB_FW_info, eventLen, "Update done!");
                         
                         
