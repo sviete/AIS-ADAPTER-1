@@ -28,8 +28,8 @@
 
 const int16_t overseerInterval = 5 * 1000; //check lan or wifi connection every 5sec
 const uint8_t overseerMaxRetry = 12; //5x12 = 60sec delay for AP start
-const uint8_t LED_BLUE = 15;
-const uint8_t LED_YELLOW = 14;
+const uint8_t LED_RED = 14;
+const uint8_t LED_GREEN = 15;
 const uint8_t MAX_SOCKET_CLIENTS = 5;
 
 enum COORDINATOR_MODE_t : uint8_t {COORDINATOR_MODE_LAN, COORDINATOR_MODE_WIFI, COORDINATOR_MODE_USB};

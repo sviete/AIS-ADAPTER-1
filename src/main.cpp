@@ -654,18 +654,18 @@ void setLedsDisable(bool mode, bool setup){
     ConfigSettings.disableLedBlue = mode;
   }
   if(mode){
-    digitalWrite(LED_BLUE, !mode);
-    digitalWrite(LED_YELLOW, !mode);
+    digitalWrite(LED_RED, !mode);
+    digitalWrite(LED_GREEN, !mode);
   }else{
     if(!ConfigSettings.disableLedYellow){
-      digitalWrite(LED_YELLOW, !mode);
+      digitalWrite(LED_GREEN, !mode);
     }else{
-      digitalWrite(LED_YELLOW, 0);
+      digitalWrite(LED_GREEN, 0);
     }
     if(ConfigSettings.coordinator_mode == COORDINATOR_MODE_USB && !ConfigSettings.disableLedBlue){
-      digitalWrite(LED_BLUE, !mode);
+      digitalWrite(LED_RED, !mode);
     }else{
-      digitalWrite(LED_BLUE, 0);
+      digitalWrite(LED_RED, 0);
     }
   }
   DEBUG_PRINTLN(F("[setLedsDisable] done"));
@@ -708,7 +708,7 @@ void toggleUsbMode(){
   configFile = LittleFS.open(path, FILE_WRITE);
   serializeJson(doc, configFile);
   configFile.close();
-  digitalWrite(LED_BLUE, ConfigSettings.coordinator_mode == COORDINATOR_MODE_USB ? 1 : 0);
+  digitalWrite(LED_RED, ConfigSettings.coordinator_mode == COORDINATOR_MODE_USB ? 1 : 0);
   ESP.restart();
 }
 
@@ -773,13 +773,13 @@ void setup(){
   pinMode(CC2652P_FLSH, OUTPUT);
   digitalWrite(CC2652P_RST, 1);
   digitalWrite(CC2652P_FLSH, 1);
-  pinMode(LED_YELLOW, OUTPUT);
-  pinMode(LED_BLUE, OUTPUT);
+  pinMode(LED_GREEN, OUTPUT);
+  pinMode(LED_RED, OUTPUT);
   pinMode(BTN, INPUT);
   pinMode(MODE_SWITCH, OUTPUT);
   digitalWrite(MODE_SWITCH, 0);//enable zigbee serial
-  digitalWrite(LED_YELLOW, 1);
-  digitalWrite(LED_BLUE, 1);
+  digitalWrite(LED_GREEN, 1);
+  digitalWrite(LED_RED, 1);
 
   //hard reset
   if(!digitalRead(BTN)){
@@ -836,15 +836,15 @@ void setup(){
         }
       }
     }
-    digitalWrite(LED_BLUE, !digitalRead(LED_BLUE));//blue led flashing mean wait for zigbee resp
+    digitalWrite(LED_RED, !digitalRead(LED_RED));//blue led flashing mean wait for zigbee resp
   }
   delay(500);
   if(!respOk){
-    digitalWrite(LED_YELLOW, 1);
-    digitalWrite(LED_BLUE, 1);
+    digitalWrite(LED_GREEN, 1);
+    digitalWrite(LED_RED, 1);
     for (uint8_t i = 0; i < 5; i++){//indicate wrong resp
-          digitalWrite(LED_YELLOW, !digitalRead(LED_YELLOW));
-          digitalWrite(LED_BLUE, !digitalRead(LED_BLUE));
+          digitalWrite(LED_GREEN, !digitalRead(LED_GREEN));
+          digitalWrite(LED_RED, !digitalRead(LED_RED));
           delay(1000);
         }
     printLogMsg("[ZBCHK] Wrong answer");
@@ -857,8 +857,9 @@ void setup(){
     printLogMsg("[ZBCHK] Connection OK");
     getZbVer();
   }
-  digitalWrite(LED_YELLOW, 0);
-  digitalWrite(LED_BLUE, 0);
+  //
+  digitalWrite(LED_GREEN, 0);
+  digitalWrite(LED_RED, 0);
   //-----------------
 
   attachInterrupt(digitalPinToInterrupt(BTN), btnInterrupt, FALLING);

@@ -115,7 +115,7 @@ void adapterModeUSB()
   printLogMsg("Switched SLZB-06 to USB mode");
   DEBUG_PRINTLN(F("Switched SLZB-06 to USB mode"));
   digitalWrite(MODE_SWITCH, 1);
-  digitalWrite(LED_BLUE, 1);
+  digitalWrite(LED_RED, 1);
 }
 
 void adapterModeLAN()
@@ -123,21 +123,21 @@ void adapterModeLAN()
   printLogMsg("Switched SLZB-06 to LAN mode");
   DEBUG_PRINTLN(F("Switched SLZB-06 to LAN mode"));
   digitalWrite(MODE_SWITCH, 0);
-  digitalWrite(LED_BLUE, 0);
+  digitalWrite(LED_RED, 0);
 }
 
 void ledYellowToggle()
 {
   printLogMsg("Yellow LED has been toggled");
   DEBUG_PRINTLN(F("Yellow LED has been toggled"));
-  digitalWrite(LED_YELLOW, !digitalRead(LED_YELLOW));
+  digitalWrite(LED_GREEN, !digitalRead(LED_GREEN));
 }
 
 void ledBlueToggle()
 {
   printLogMsg("Blue LED has been toggled");
   DEBUG_PRINTLN(F("Blue LED has been toggled"));
-  digitalWrite(LED_BLUE, !digitalRead(LED_BLUE));
+  digitalWrite(LED_RED, !digitalRead(LED_RED));
 }
 
 void getDeviceID(char * arr){
@@ -217,12 +217,12 @@ String hexToDec(String hexString)
 
 void resetSettings(){ 
   DEBUG_PRINTLN(F("[resetSettings] Start"));
-  digitalWrite(LED_BLUE, 1);
-  digitalWrite(LED_YELLOW, 0);
+  digitalWrite(LED_RED, 1);
+  digitalWrite(LED_GREEN, 0);
   for (uint8_t i = 0; i < 15; i++){
     delay(200);
-    digitalWrite(LED_BLUE, !digitalRead(LED_BLUE));
-    digitalWrite(LED_YELLOW, !digitalRead(LED_YELLOW));
+    digitalWrite(LED_RED, !digitalRead(LED_RED));
+    digitalWrite(LED_GREEN, !digitalRead(LED_GREEN));
   }
   DEBUG_PRINTLN(F("[resetSettings] Led blinking done"));
   if (!LittleFS.begin(FORMAT_LITTLEFS_IF_FAILED, "/lfs2", 10)){
