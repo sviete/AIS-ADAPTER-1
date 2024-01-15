@@ -13,6 +13,7 @@ This document describes rules that are in effect for this repository, meant for 
 ## Opening New Issues
 
 **Issue tracker is NOT a general discussion forum!**
+
 1. Opening an issue means that a problem exists in the code and should be addressed by the project contributors.
 2. When opening an issue, it is required to fill out the presented template. The requested information is important! If the template is ignored or insufficient info about the issue is provided, the issue may be closed.
 3. Questions of type "How do I..." or "Can you please help me with..." or "Can Tasmota do..." WILL NOT be handled here. Such questions should be directed at a discussion forum or to the Tasmota Support Chat. All issues of this type will be closed with a simple reference to this contributing policy.
@@ -23,17 +24,17 @@ This document describes rules that are in effect for this repository, meant for 
 
 ## Triaging of Issues/PR's
 
-1.	Any contributor to the project can participate in the triaging process, if he/she chooses to do so.
-2.	An issue that needs to be closed, either due to not complying with this policy, or for other reasons, should be closed by a contributor.
-3.	Issues that are accepted should be marked with appropriate labels.
-4.	Issues that could impact functionality for many users should be considered severe.
-5.	Issues caused by the SDK or chip should not be marked severe, as there usually isn’t much to be done. Common sense should be applied when deciding. Such issues should be documented in the Wiki, for reference by users.
-6.	Issues with feature requests should be discussed for viability/desirability.
-7.	Feature requests or changes that are meant to address a very specific/limited use case, especially if at the expense of increased code complexity, may be denied, or may be required to be redesigned, generalized, or simplified.
-8.	Feature requests that are not accompanied by a PR:
+1. Any contributor to the project can participate in the triaging process, if he/she chooses to do so.
+2. An issue that needs to be closed, either due to not complying with this policy, or for other reasons, should be closed by a contributor.
+3. Issues that are accepted should be marked with appropriate labels.
+4. Issues that could impact functionality for many users should be considered severe.
+5. Issues caused by the SDK or chip should not be marked severe, as there usually isn’t much to be done. Common sense should be applied when deciding. Such issues should be documented in the Wiki, for reference by users.
+6. Issues with feature requests should be discussed for viability/desirability.
+7. Feature requests or changes that are meant to address a very specific/limited use case, especially if at the expense of increased code complexity, may be denied, or may be required to be redesigned, generalized, or simplified.
+8. Feature requests that are not accompanied by a PR:
     * could be closed immediately (denied).
     * could be closed after some predetermined period of time (left as candidate for somebody to pick up).
-9.	In some cases, feedback may be requested from the issue reporter, either as additional info for clarification, additional testing, or other. If no feedback is provided, the issue may be closed by a contributor or after 30 days by the STALE bot.
+9. In some cases, feedback may be requested from the issue reporter, either as additional info for clarification, additional testing, or other. If no feedback is provided, the issue may be closed by a contributor or after 30 days by the STALE bot.
 
 ## Pull requests
 
@@ -103,10 +104,6 @@ CLA is a safety because it also ensures that once you have provided a contributi
 A __license__ grants "outbound" rights to the user of project.
 
 A __CLA__ enables a contributor to grant "inbound" rights to a project.
-
-
-
-
 
 <Other>
 <A table should be maintained for relating maintainers and components. When triaging, this is essential to figure out if someone in particular should be consulted about specific changes.>

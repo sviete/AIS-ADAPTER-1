@@ -70,7 +70,7 @@ All notable changes to this project will be documented in this file.
 - All svg icons combined into one;
 - "About" page rework;
 - No more html.h all html code moved to separate page files;
-- Coordinator modes logic rework - according to the [latest v0.9.8 scheme](https://github.com/smlight-dev/slzb-06-firmware/blob/main/images/mode-logic-v0.9.8.jpg);
+- Coordinator modes logic rework;
 - HUGE web interface update. Web interface now is "One Page App", no more senseless page refreshes;
 - Completely reworked saving settings in web.cpp, now used ArduinoJson;
 - Completely reworked transfering parameters from the device to the interface;

@@ -559,9 +559,13 @@ function modalConstructor(type, params) {
 							id: "flashZBrow"
 						})
 					}).appendTo(modalBody);
+					// $("<span>", {
+					// 	"class": cl,
+					// 	text: "Your current firmware revision: " + curZbVer
+					// }).appendTo(flashZBrow);
 					$("<span>", {
 						"class": cl,
-						text: "Your current firmware revision: " + curZbVer
+						text: "Your current firmware revision: " + "20230313"
 					}).appendTo(flashZBrow);
 					$("<hr>", {
 						"class": "border border-dark border-top"
@@ -590,10 +594,10 @@ function modalConstructor(type, params) {
 					$("<hr>", {
 						"class": "border border-dark border-top"
 					}).appendTo(flashZBrow);
-					$("<span>", {
-						"class": cl,
-						text: "Awaiable router firmware:"
-					}).appendTo(flashZBrow);
+					// $("<span>", {
+					// 	"class": cl,
+					// 	text: "Awaiable router firmware:"
+					// }).appendTo(flashZBrow);
 					$("<textarea>", {
 						"class": cl + "form-control",
 						text: "Revision: " + fw.router.rev + "\nRelease notes:\n" + fw.router.notes,
