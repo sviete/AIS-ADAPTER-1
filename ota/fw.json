@@ -1,6 +1,6 @@
 {
 	"coordinator":{
-		"link":"https://raw.githubusercontent.com/sviete/AIS-ADAPTER-1/main/ota/ncp-uart-sw_6.7.10_115200.ota",
+		"link":"https://raw.githubusercontent.com/sviete/AIS-ADAPTER-1/main/ota/ncp-uart-sw_6.7.10_115200.ota.tmp",
 		"rev":"20230313",
 		"notes":"Recommended stable version for EZSP v8 compatible."
 	},

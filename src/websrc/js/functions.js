@@ -598,22 +598,22 @@ function modalConstructor(type, params) {
 					// 	"class": cl,
 					// 	text: "Awaiable router firmware:"
 					// }).appendTo(flashZBrow);
-					$("<textarea>", {
-						"class": cl + "form-control",
-						text: "Revision: " + fw.router.rev + "\nRelease notes:\n" + fw.router.notes,
-						rows: rows,
-						disabled: ""
-					}).appendTo(flashZBrow);
-					$("<button>", {
-						"class": cl + "btn btn-warning",
-						text: "Flash Router " + fw.router.rev,
-						click: function() {
-							startEvents();
-							$.get(apiLink + api.actions.API_FLASH_ZB + "&fwurl=" + fw.router.link, function () {
+					// $("<textarea>", {
+					// 	"class": cl + "form-control",
+					// 	text: "Revision: " + fw.router.rev + "\nRelease notes:\n" + fw.router.notes,
+					// 	rows: rows,
+					// 	disabled: ""
+					// }).appendTo(flashZBrow);
+					// $("<button>", {
+					// 	"class": cl + "btn btn-warning",
+					// 	text: "Flash Router " + fw.router.rev,
+					// 	click: function() {
+					// 		startEvents();
+					// 		$.get(apiLink + api.actions.API_FLASH_ZB + "&fwurl=" + fw.router.link, function () {
 								
-							});
-						}
-					}).appendTo(flashZBrow);
+					// 		});
+					// 	}
+					// }).appendTo(flashZBrow);
 				});
 				
 			}).fail(function() {
